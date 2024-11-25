@@ -21,15 +21,13 @@ Application web développée dans le cadre du projet SI, permettant la gestion c
 ## 🚀 Fonctionnalités Clés
 
 ### Dashboard
-![Dashboard](![home](https://github.com/user-attachments/assets/8426ae8f-e0f6-4e2d-bea9-b93012e2777e)
-)
+![Dashboard](home.png)
 - Vue d'ensemble statistique
 - Suivi des activités récentes
 - Interface administrateur intuitive
 
 ### Gestion des Données
-![Gestion Étudiants](![interior](https://github.com/user-attachments/assets/5f0f0019-bbf2-4e88-b354-04ee6f2f8393)
-)
+![Gestion Étudiants](interior.png)
 - CRUD complet pour tous les acteurs (Étudiants, Professeurs, Entreprises, Stages)
 - Système de recherche intégré
 - Actions rapides
