@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    
+    <!-- css -->
+	
+	<link rel="stylesheet" th:href="@{/styles/student.css}" />
+	<link rel="stylesheet" th:href="@{/styles/style.css}" />
+	<style>
+        .modal{
+            display: block;
+        }
+
+        .modal-content{
+            margin: 10% auto;
+        }
+
+        form {
+    display: inline-block; /* Align forms side by side */
+     ; /* Remove default margins */
+}
+
+.form-cont{
+    display: flex;
+    margin-top: 25px;
+    justify-content: center;
+    gap: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 10px 5px 10px 0; /* Adjusted margin for inline display */
+}
+
+.btn.confirm {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn.cancel {
+    background-color: #3d3b3a;
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+
+    </style>
+    
+</head>
+<body>
+
+    
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+               <img src="/img/DALL·E 2024-01-08 12.33.40 - Create a very simple, low-detail logo for a commerce school called 'ECM'. The logo should feature minimalistic design elements, emphasizing the abbrev_preview_rev_1.png" alt="">
+            </div>
+            <span class="logo_name">Ecole De Commerce</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="#">
+                    <i class="uil uil-estate"></i>
+                    <span class="link-name">Tableau de bord</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="uil uil-suitcase-alt"></i>
+                    <span class="link-name">Stages</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="uil uil-users-alt active"></i>
+                    <span class="link-name active">Etudiants</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="uil uil-graduation-cap"></i>
+                    <span class="link-name">Professeurs</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="uil uil-building"></i>
+                    <span class="link-name">Entreprises</span>
+                </a></li>
+            </ul>
+            
+            <ul class="logout-mode">
+                <li><a href="#">
+                    <i class="uil uil-signout"></i>
+                    <span class="link-name">Logout</span>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <section class="dashboard">
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+            <!-- <div class="search-box">
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Search here...">
+            </div> -->
+            
+            <img src="/img/user_9758507.png" alt="">
+        </div>
+
+        <div class="dash-content">
+            
+            <div class="container_ser">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Rechercher par Nom" class="search-bar">
+                </div>
+                <div class="bouton">
+                    <button class="btn add-student" id="openModalButton">Ajouter un étudiant</button>
+                </div>
+            </div>
+            
+            <div class="clear"></div> <!-- Clear the float -->
+            <div class="table-container">
+				
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Promo</th>
+                      <th>Qualité</th>
+                      <th>Nom</th>
+                      <th>Prénom</th>
+                      <th>Ville</th>
+                      <th>Né(e) le</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1999</td>
+                      <td>Mlle</td>
+                      <td>HABERTET</td>
+                      <td>Juliette</td>
+                      <td>Aix en Provence</td>
+                      <td>04/10/77</td>
+                      <td>
+                        <button class="btn edit">Edit</button>
+                        <button class="btn remove">Remove</button>
+                      </form>
+                      </td>
+                    </tr>
+                    <tr>
+                        <td>1999</td>
+                        <td>Mlle</td>
+                        <td>AUJOULIN</td>
+                        <td>Eric</td>
+                        <td>Marseille</td>
+                        <td>10/11/77</td>
+                        <td>
+                          <button class="btn edit">Edit</button>
+                          <button class="btn remove">Remove</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>1999</td>
+                        <td>M</td>
+                        <td>BOULIN</td>
+                        <td>Frédéric</td>
+                        <td>Toulon</td>
+                        <td>14/05/76</td>
+                        <td>
+                          <button class="btn edit">Edit</button>
+                          <button class="btn remove">Remove</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>2000</td>
+                        <td>Mme</td>
+                        <td>CHARDIN</td>
+                        <td>Joséphine</td>
+                        <td>Martigues</td>
+                        <td>04/03/76</td>
+                        <td>
+                          <button class="btn edit">Edit</button>
+                          <button class="btn remove">Remove</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>2000</td>
+                        <td>Mlle</td>
+                        <td>GORBET</td>
+                        <td>Caroline</td>
+                        <td>Marseille</td>
+                        <td>15/01/78</td>
+                        <td>
+                          <button class="btn edit">Edit</button>
+                          <button class="btn remove">Remove</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>2001</td>
+                        <td>M</td>
+                        <td>BOUGEAT</td>
+                        <td>Julien</td>
+                        <td>Marseille</td>
+                        <td>17/08/79</td>
+                        <td>
+                          <button class="btn edit">Edit</button>
+                          <button class="btn remove">Remove</button>
+                        </td>
+                      </tr>
+                      
+                    <!-- Additional rows omitted for brevity, but follow the same structure -->
+                  </tbody>
+                </table>
+                <div class="pagination">
+                    <button class="btn pagination-btn" id="prevBtn">Préc</button>
+                    <button class="btn pagination-btn" id="nextBtn">Suiv</button>
+                </div>
+              </div>
+        </div>
+        
+    </section>
+    
+    
+    <div id="studentModal" class="modal">
+      <div class="modal-overlay" id="overlay" onclick="closeModal()"></div>
+      <div class="modal-content">
+		  <h2>Confirmation de suppression</h2>
+		   <p>Êtes-vous sûr de vouloir supprimer l'entreprise ?</p>
+		  <div class="form-cont">
+		
+        <form th:action="@{/ents/confirm-delete-ent}" method="post">
+            <input type="hidden" name="id" th:value="${entId}"/>
+            <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> -->
+            <button type="submit" class="btn confirm">Supprimer</button>
+        </form>
+    
+        <form th:action="@{/ents/confirm-delete-cancel-ent}" method="post">
+            <!-- <input type="hidden" name="id" th:value="${studentId}"/> -->
+           <!--  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> -->
+            <button type="submit" class="btn cancel">Annuler</button>
+        </form>
+    </div>
+   
+    
+          
+      </div>
+  </div>
+
+
+
+    
+</body>
+</html>

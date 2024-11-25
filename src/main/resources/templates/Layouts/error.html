@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    
+    <!-- css -->
+	
+	<link rel="stylesheet" th:href="@{/styles/student.css}" />
+	<link rel="stylesheet" th:href="@{/styles/style.css}" />
+    
+</head>
+<body>
+
+    
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+               <img src="/img/DALL·E 2024-01-08 12.33.40 - Create a very simple, low-detail logo for a commerce school called 'ECM'. The logo should feature minimalistic design elements, emphasizing the abbrev_preview_rev_1.png" alt="">
+            </div>
+            <span class="logo_name">Ecole De Commerce</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="/">
+                    <i class="uil uil-estate"></i>
+                    <span class="link-name">Tableau de bord</span>
+                </a></li>
+                <li><a href="/sts/stages">
+                    <i class="uil uil-suitcase-alt"></i>
+                    <span class="link-name">Stages</span>
+                </a></li>
+                <li><a th:href="@{/etu/students}">
+                    <i class="uil uil-users-alt active"></i>
+                    <span class="link-name active">Etudiants</span>
+                </a></li>
+                <li><a href="/profs/professeurs">
+                    <i class="uil uil-graduation-cap"></i>
+                    <span class="link-name">Professeurs</span>
+                </a></li>
+                <li><a href="/ents/entreprises">
+                    <i class="uil uil-building"></i>
+                    <span class="link-name">Entreprises</span>
+                </a></li>
+            </ul>
+            
+            <ul class="logout-mode">
+                <li><a href="#">
+                    <i class="uil uil-signout"></i>
+                    <span class="link-name">Logout</span>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <section class="dashboard">
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+            <!-- <div class="search-box">
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Search here...">
+            </div> -->
+            
+            <img src="/img/user_9758507.png" alt="">
+        </div>
+
+        Erreur de contrainte de clé étrangère.
+        
+    </section>
+    
+    
+
+	
+    <script th:src="@{/scripts/script.js}"></script>
+    
+    
+</body>
+</html>

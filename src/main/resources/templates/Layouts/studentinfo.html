@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    
+    <!-- css -->
+	
+	<link rel="stylesheet" th:href="@{/styles/student.css}" />
+	<link rel="stylesheet" th:href="@{/styles/style.css}" />
+	<style>
+        .modal{
+            display: block;
+        }
+
+        .modal-content {
+    background-color: #ffffff;
+    margin: 5% auto;
+    padding: 25px;
+    border-radius: 15px;
+    width: 50%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    position: relative;
+    animation: modalFadeIn 0.5s;
+    color: #333333;
+    font-family: 'Arial', sans-serif;
+}
+
+@keyframes modalFadeIn {
+    from {transform: translateY(-50px); opacity: 0;}
+    to {transform: translateY(0); opacity: 1;}
+}
+
+h2 {
+    color: #4CAF50;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 500;
+}
+
+label {
+    font-size: 17px;
+    color: rgb(54, 54, 54);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.info {
+    padding: 10px 15px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    margin-top: 4px;
+    font-size: 16px;
+    color: #444444;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.info:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #fff;
+}
+
+
+.info-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.info-group > div {
+    flex-basis: 48%;
+}
+
+.retour-button {
+    display: block;
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    margin: 20px 0 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.retour-button:hover {
+    background-color: #367c39;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .modal-content {
+        width: 80%;
+    }
+
+    .info-group {
+        flex-direction: column;
+    }
+
+    .info-group > div {
+        flex-basis: 100%;
+    }
+}
+    </style>
+    
+</head>
+<body>
+
+    
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+               <img src="/img/DALL·E 2024-01-08 12.33.40 - Create a very simple, low-detail logo for a commerce school called 'ECM'. The logo should feature minimalistic design elements, emphasizing the abbrev_preview_rev_1.png" alt="">
+            </div>
+            <span class="logo_name">Ecole De Commerce</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="#">
+                    <i class="uil uil-estate"></i>
+                    <span class="link-name">Tableau de bord</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="uil uil-suitcase-alt"></i>
+                    <span class="link-name">Stages</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="uil uil-users-alt active"></i>
+                    <span class="link-name active">Etudiants</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="uil uil-graduation-cap"></i>
+                    <span class="link-name">Professeurs</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="uil uil-building"></i>
+                    <span class="link-name">Entreprises</span>
+                </a></li>
+            </ul>
+            
+            <ul class="logout-mode">
+                <li><a href="#">
+                    <i class="uil uil-signout"></i>
+                    <span class="link-name">Logout</span>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <section class="dashboard">
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+            <!-- <div class="search-box">
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Search here...">
+            </div> -->
+            
+            <img src="/img/user_9758507.png" alt="">
+        </div>
+
+        <div class="dash-content">
+            
+            <div class="container_ser">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Rechercher par Nom" class="search-bar">
+                </div>
+                <div class="bouton">
+                    <button class="btn add-student" id="openModalButton">Ajouter un étudiant</button>
+                </div>
+            </div>
+            
+            <div class="clear"></div> <!-- Clear the float -->
+            <div class="table-container">
+				
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Promo</th>
+                      <th>Qualité</th>
+                      <th>Nom</th>
+                      <th>Prénom</th>
+                      <th>Ville</th>
+                      <th>Né(e) le</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1999</td>
+                      <td>Mlle</td>
+                      <td>HABERTET</td>
+                      <td>Juliette</td>
+                      <td>Aix en Provence</td>
+                      <td>04/10/77</td>
+                      <td>
+                        <button class="btn edit">Edit</button>
+                        <button class="btn remove">Remove</button>
+                      </form>
+                      </td>
+                    </tr>
+                    <tr>
+                        <td>1999</td>
+                        <td>Mlle</td>
+                        <td>AUJOULIN</td>
+                        <td>Eric</td>
+                        <td>Marseille</td>
+                        <td>10/11/77</td>
+                        <td>
+                          <button class="btn edit">Edit</button>
+                          <button class="btn remove">Remove</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>1999</td>
+                        <td>M</td>
+                        <td>BOULIN</td>
+                        <td>Frédéric</td>
+                        <td>Toulon</td>
+                        <td>14/05/76</td>
+                        <td>
+                          <button class="btn edit">Edit</button>
+                          <button class="btn remove">Remove</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>2000</td>
+                        <td>Mme</td>
+                        <td>CHARDIN</td>
+                        <td>Joséphine</td>
+                        <td>Martigues</td>
+                        <td>04/03/76</td>
+                        <td>
+                          <button class="btn edit">Edit</button>
+                          <button class="btn remove">Remove</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>2000</td>
+                        <td>Mlle</td>
+                        <td>GORBET</td>
+                        <td>Caroline</td>
+                        <td>Marseille</td>
+                        <td>15/01/78</td>
+                        <td>
+                          <button class="btn edit">Edit</button>
+                          <button class="btn remove">Remove</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>2001</td>
+                        <td>M</td>
+                        <td>BOUGEAT</td>
+                        <td>Julien</td>
+                        <td>Marseille</td>
+                        <td>17/08/79</td>
+                        <td>
+                          <button class="btn edit">Edit</button>
+                          <button class="btn remove">Remove</button>
+                        </td>
+                      </tr>
+                      
+                    <!-- Additional rows omitted for brevity, but follow the same structure -->
+                  </tbody>
+                </table>
+                <div class="pagination">
+                    <button class="btn pagination-btn" id="prevBtn">Préc</button>
+                    <button class="btn pagination-btn" id="nextBtn">Suiv</button>
+                </div>
+              </div>
+        </div>
+        
+    </section>
+    
+    
+    <div id="studentModal" class="modal">
+      <div class="modal-overlay" id="overlay" onclick="closeModal()">
+      
+      </div>
+      <div class="modal-content">
+		  <h2>Informations de l'Étudiant</h2>
+
+        <div class="info-group">
+            <div>
+                <label>Nom:</label>
+                <div class="info"><span th:text="${student.nom}">[prenom]</span></div>
+            </div>
+            <div>
+                <label>Prénom:</label>
+                <div class="info"> <span th:text="${student.prenom}">[prenom]</span> </div>
+            </div>
+        </div>
+        
+        <div class="info-group">
+            <div>
+                <label>Qualité:</label>
+                <div class="info"><span th:text="${student.qualite}">[prenom]</span></div>
+            </div>
+            <div>
+                <label>Adresse:</label>
+                <div class="info"><span th:text="${student.adresse}">[prenom]</span></div>
+            </div>
+        </div>
+        <div class="info-group">
+            <div>
+                <label>Code Postal:</label>
+                <div class="info"><span th:text="${student.codePostal}">[prenom]</span></div>
+            </div>
+            <div>
+                <label>Date de Naissance:</label>
+                <div class="info"><span th:text="${student.ddn}">[prenom]</span></div>
+            </div>
+        </div>
+        <div class="info-group">
+            <div>
+                <label>Sexe:</label>
+                <div class="info"><span th:text="${student.sexe}">[prenom]</span></div>
+            </div>
+            <div>
+                <label>Mention:</label>
+                <div class="info"><span th:text="${student.mention}">[prenom]</span></div>
+            </div>
+        </div>
+        <div class="info-group">
+            <div>
+                <label>Ville:</label>
+                <div class="info"><span th:text="${student.ville}">[prenom]</span></div>
+            </div>
+            <div>
+                <label>Téléphone:</label>
+                <div class="info"><span th:text="${student.numTel}">[prenom]</span></div>
+            </div>
+        </div>
+
+        <div class="info-group">
+            <div>
+                <label>Année de Promotion:</label>
+                <div class="info"><span th:text="${student.promo.id}">[prenom]</span></div>
+            </div>
+        </div>
+
+        <button class="retour-button" id="myButton"><a th:href="@{/etu/students}" style="color: white; text-decoration: none;">Retour</a></button>
+        
+          
+      </div>
+  </div>
+
+
+
+    <script>
+		document.getElementById('myButton').addEventListener('click', function() {
+       window.location.href = '/etu/students';
+});
+	</script>
+</body>
+</html>

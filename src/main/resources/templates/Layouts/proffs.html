@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    
+    <!-- css -->
+	
+	<link rel="stylesheet" th:href="@{/styles/student.css}" />
+	<link rel="stylesheet" th:href="@{/styles/style.css}" />
+    
+</head>
+<div>
+
+    
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+               <img src="/img/DALL·E 2024-01-08 12.33.40 - Create a very simple, low-detail logo for a commerce school called 'ECM'. The logo should feature minimalistic design elements, emphasizing the abbrev_preview_rev_1.png" alt="">
+            </div>
+            <span class="logo_name">Ecole De Commerce</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="/">
+                    <i class="uil uil-estate"></i>
+                    <span class="link-name">Tableau de bord</span>
+                </a></li>
+                <li><a href="/sts/stages">
+                    <i class="uil uil-suitcase-alt"></i>
+                    <span class="link-name">Stages</span>
+                </a></li>
+                <li><a th:href="@{/etu/students}">
+                    <i class="uil uil-users-alt"></i>
+                    <span class="link-name ">Etudiants</span>
+                </a></li>
+                <li><a href="/profs/professeurs">
+                    <i class="uil uil-graduation-cap active"></i>
+                    <span class="link-name active">Professeurs</span>
+                </a></li>
+                <li><a href="/ents/entreprises">
+                    <i class="uil uil-building"></i>
+                    <span class="link-name">Entreprises</span>
+                </a></li>
+            </ul>
+            
+            <ul class="logout-mode">
+                <li><a href="#">
+                    <i class="uil uil-signout"></i>
+                    <span class="link-name">Logout</span>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+	
+    <section class="dashboard">
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+            
+            
+            <img src="/img/user_9758507.png" alt="">
+        </div>
+
+        <div class="dash-content">
+            
+            <div class="container_ser">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Rechercher par Nom" class="search-bar">
+                </div>
+                <div class="bouton">
+                    <button class="btn add-student" id="openModalButton">Ajouter un Professeur</button>
+                </div>
+            </div>
+            <div th:if="${successMessage}" class="alert alert-success" style="height: 40px; background-color: rgb(58, 161, 58); ">
+				<div class="text" style="display: flex; justify-content: center; align-items: center; padding: 5px;">
+		    	<p th:text="${successMessage}" style="color: white; font-size: 18px;"></p>
+		    	</div>
+			</div>
+            
+            <div class="clear"></div> 
+            <div class="table-container">
+				
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Qualité</th>
+                      <th>Nom</th>
+                      <th>Prénom</th>
+                      <th>Ville</th>
+                      <th>Num tel</th>
+                      <th>Date d'embauche</th> 
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="prof : ${professors}">
+		                
+		                <td th:text="${prof.qualite}"></td>
+		                <td th:text="${prof.nom}"></td>
+		                <td th:text="${prof.prenom}"></td>
+		                <td th:text="${prof.ville}"></td>
+		                <td th:text="${prof.telDomicile}"></td>
+		                <td th:text="${prof.dateEmbauche}"></td>
+		                <td>
+                          <button class="btn edit"><a style="color: white; text-decoration: none;" th:href="@{/profs/showinfoprof/{id}(id=${prof.id})}" > Suite </a></button>
+                          <button class="btn remove"><a style="color: white; text-decoration: none;" th:href="@{/profs/confirmdeleteprof/{id}(id=${prof.id})}"> Supprimer </a></button>
+                        </td>
+             
+           			 </tr>
+                     
+                  </tbody>
+                </table>
+                <div class="pagination">
+                    <button class="btn pagination-btn" id="prevBtn">Préc</button>
+                    <button class="btn pagination-btn" id="nextBtn">Suiv</button>
+                </div>
+              </div>
+              
+              
+        </div>
+        
+    </section>
+    
+    
+    <div id="studentModal" class="modal">
+      <div class="modal-overlay" id="overlay" onclick="closeModal()">
+      
+      </div>
+      <div class="modal-content">
+          <form id="studentForm"  th:action="@{/profs/ajouterprof}" action="#" method="POST" th:object="${profajout}">
+              <h2>Ajouter un Nouveau Professeur</h2>
+
+              <div class="input-group">
+                <div>
+                    <label for="nom">Nom:</label>
+                    <input th:field="*{nom}"  type="text" id="nom" name="nom" required>
+                </div>
+                <div>
+                    <label for="prenom">Prénom:</label>
+                    <input th:field="*{prenom}" type="text" id="prenom" name="prenom" required>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <div>
+                    <label for="qualite">Qualité:</label>
+                    <input th:field="*{qualite}" type="text" id="qualite" name="qualite" required>
+                </div>
+                <div>
+                    <label for="adresse">Adresse:</label>
+                    <input th:field="*{adresse}" type="text" id="adresse" name="adresse" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+              <div>
+                <label for="codepostale">Code Postal:</label>
+                <input th:field="*{codePostal}" type="text" id="codepostale" name="codepostale" required>
+              </div>
+              <div>
+                <label for="ddn">Ville:</label>
+                <input th:field="*{ville}" type="text" id="ddn" name="ddn" required>
+              </div>
+          </div>
+          
+          <div class="input-group">
+              <div>
+				  <label for="ddn">Date d'embauche:</label>
+                <input th:field="*{dateEmbauche}" type="date" id="ddn" name="ddn" required>
+              </div>
+              
+              <div>
+                <label for="sexe">Date de départ:</label> 
+                <input th:field="*{dateDepart}" type="date" id="ddn" name="ddn" required>
+              </div>
+              
+          </div>
+
+          
+          <div class="input-group">
+            
+			   <div>
+                <label for="mention">Télephone école:</label>
+                <input th:field="*{telEcole}" type="text" id="mention" name="mention" required>
+              </div>
+              <div>
+              <label for="ville">Télephone domicile:</label>
+              <input th:field="*{telDomicile}" type="text" id="ville" name="ville" required>
+              </div>
+           </div>
+        
+        
+
+              <button type="submit" class="submit-button">Ajouter</button>
+          </form>
+          
+         </div>
+  
+   </div>
+  
+	<script th:src="@{/scripts/scriptprof.js}"></script>
+   
+    
+    
+</body>
+</html>
